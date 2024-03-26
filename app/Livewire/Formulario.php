@@ -14,7 +14,7 @@ class Formulario extends Component
 {
     use WithFileUploads;
     public $atr = '';
-    public $check = ['true'];
+    public $check = [];
     public $image = [];
     public $item_id;
     public $item_selected = [];

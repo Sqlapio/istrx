@@ -24,8 +24,8 @@
                                         <tr>
                                             <th scope="col" class="px-2">
                                                 <label class="inline-flex items-center cursor-pointer">
-                                                    <input type="checkbox" id="{{ $subitems->id }}" wire:model="check" value="{{ $subitems->id }}" class="sr-only peer">
-                                                    <div class="relative w-11 h-6 bg-red-600 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-gren-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-red-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all peer-checked:bg-green-600"></div>
+                                                    <input type="checkbox" wire:model="check.{{ $subitems->id }}" name="check" value="{{ $subitems->id }}" class="sr-only peer">
+                                                    <div wire:key="{{ $subitems->id }}" class="relative w-11 h-6 bg-green-600 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-red-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all peer-checked:bg-red-600"></div>
                                                 </label>
                                             </th>
                                         </tr>
@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <label class="border-2 border-gray-200 p-3 mb-8 w-full block rounded-full cursor-pointer my-1" x-data="{ files: null }">
-                            <input type="file" wire:model="image" class="sr-only" id="{{ $subitems->id }}" x-on:change="files = Object.values($event.target.files)">
+                            <input type="file" wire:model="image.{{ $subitems->id }}" class="sr-only" value="image.{{ $subitems->id }}" id="{{ $subitems->id }}" x-on:change="files = Object.values($event.target.files)">
                             <span x-text="files ? files.map(file => file.name).join(', ') : 'Cargar imagen...'"></span>
                         </label>
                     @endforeach
@@ -48,6 +48,9 @@
             </div>
         </div>
     </div>
+    {{-- @foreach([10, 11, 12, 13] as $k => $v)
+    {{ $k }}
+    @endforeach --}}
     {{-- <input class="filepond" type="file"  id="{{$items->id}}" multiple  data-allow-reorder="true" data-max-file-size="5MB" data-max-files="3" wire.model="file" style="text-decoration-color: #ec0303;"> --}}
 
 </div>
