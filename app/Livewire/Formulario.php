@@ -31,8 +31,8 @@ class Formulario extends Component
     {
         $valores = [];
 
-        for ($i = 0; $i < count($this->item_selected); $i++) {
-            $porcentaje = Subitem::where('id', $this->item_selected[$i])->first()->porcentaje;
+        for ($i = 0; $i < count($this->check); $i++) {
+            $porcentaje = Subitem::where('descripcion', $this->check[$i])->first()->porcentaje;
             array_push($valores, $porcentaje);
         }
 
@@ -64,7 +64,17 @@ class Formulario extends Component
 
     public function store()
     {
-        dd($this->check, $this->image);
+        dump($this->check);
+
+        $pr = Subitem::where('item_id', $this->item_id)->get();
+        dump($pr);
+
+        foreach ($pr as $value) {
+            # code...
+            dump(in_array($value->descripcion ,$this->check));
+        }
+
+        // dd($this->check, $this->item_id);
         try {
 
             $user = Auth::user()->name;
@@ -98,11 +108,11 @@ class Formulario extends Component
     public function render()
     {
         $item_id = $this->item_id;
-        $total = $this->total_vista;
+        $total = 100 - $this->total_vista;
         $items = Item::find($this->item_id);
-        $items_rela = $items->get_subitems;
+        $items_relation = $items->get_subitems;
 
 
-        return view('livewire.formulario', compact('items', 'total', 'item_id','items_rela'));
+        return view('livewire.formulario', compact('items', 'total', 'item_id','items_relation'));
     }
 }

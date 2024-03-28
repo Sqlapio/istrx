@@ -15,8 +15,8 @@
         <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
 
         <!-- FilePond -->
-        <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
-        <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+        {{-- <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+        <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet"> --}}
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -39,7 +39,5 @@
                 {{ $slot }}
             </main>
         </div>
-        <!-- filepond -->
-        <x-filepond />
     </body>
 </html>
