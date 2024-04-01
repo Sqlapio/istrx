@@ -3,8 +3,10 @@
 namespace App\Livewire;
 
 use App\Http\Controllers\UtilsController;
+use App\Models\DetalleInspeccion;
 use App\Models\Item;
 use App\Models\Informe;
+use App\Models\Inspeccion;
 use App\Models\Subitem;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -14,16 +16,17 @@ class Formulario extends Component
 {
     use WithFileUploads;
     public $atr = '';
-    public $check = [];
-    public $image = [];
+    public array $check;
+    public array $image;
     public $item_id;
     public $item_selected = [];
 
     public $total_vista;
+    public $total_inspeccion;
 
     public $observaciones;
 
-    public $hidden_item = '';
+    public $hidden_item = 'hidden';
     public $hidden_observaciones = '';
     public $hidden_botton = '';
 
@@ -39,11 +42,13 @@ class Formulario extends Component
         $this->total_vista = array_sum($valores);
     }
 
-    protected function ocultar()
+    public function ocultar($item)
     {
-        $this->hidden_item = 'hidden';
-        $this->hidden_observaciones = 'hidden';
-        $this->hidden_botton = 'hidden';
+        $existe = Inspeccion::where('item_id', $item)->where('fecha', date('d-m-Y'))->first();
+        if(!isset($existe))
+        {
+            $this->hidden_item = '';
+        }
     }
 
 
@@ -64,15 +69,25 @@ class Formulario extends Component
 
     public function store()
     {
-        dump($this->check);
+        // dump($this->check);
+        // dump($this->image);
+        // dump(100 - $this->total_vista);
 
-        $pr = Subitem::where('item_id', $this->item_id)->get();
-        dump($pr);
+        // $pr = Subitem::where('item_id', $this->item_id)->get();
+        // dump($pr);
 
-        foreach ($pr as $value) {
-            # code...
-            dump(in_array($value->descripcion ,$this->check));
-        }
+        // foreach ($pr as $value) {
+        //     # code...
+        //     dump(in_array($value->descripcion ,$this->check));
+        // }
+        // foreach ($this->image as $key => $value) {
+        //     # code...
+        //     dump($key);
+        // }
+        // dd($this->item_id);
+
+
+
 
         // dd($this->check, $this->item_id);
         try {
@@ -81,21 +96,44 @@ class Formulario extends Component
 
             $item_descripcion = Item::where('id', $this->item_id)->first()->descripcion;
 
-            $recorrido = new Informe();
-            $recorrido->item_id = $this->item_id;
-            $recorrido->descripcion = $item_descripcion;
-            $recorrido->operatividad = $this->total_vista;
-            $recorrido->fecha_reporte = date('d-m-Y');
-            $recorrido->total_personal = '20';
-            $recorrido->observaciones = $this->observaciones;
-            $recorrido->responsable = $user;
-            $recorrido->save();
+            $inspeccions = new Inspeccion();
+            $inspeccions->codigo = random_int(11111111, 99999999);
+            $inspeccions->fecha = date('d-m-Y');
+            $inspeccions->item_id = $this->item_id;
+            $inspeccions->item = $item_descripcion;
+            $inspeccions->porcen_total = 100 - $this->total_vista;
+            $inspeccions->observaciones = $this->observaciones;
+            $inspeccions->responsable = $user;
+            $inspeccions->save();
+
+            /**
+             * Guardo el detalle de la inspeccion
+             */
+            $array_subitems = Subitem::where('item_id', $this->item_id)->get();
+
+
+            foreach ($array_subitems as $value) {
+                $detalle_inspeccions = new DetalleInspeccion();
+                $detalle_inspeccions->inspeccion_id = $inspeccions->id;
+                if (in_array($value->descripcion, $this->check) == true) {
+                    $detalle_inspeccions->status = 2;
+                }
+                $detalle_inspeccions->fecha = date('d-m-Y');
+                $detalle_inspeccions->item_id = $value->item_id;
+                $detalle_inspeccions->subitem = $value->descripcion;
+                $detalle_inspeccions->image = $this->observaciones;
+                $detalle_inspeccions->responsable = $user;
+                $detalle_inspeccions->save();
+
+            }
+
+
 
             sleep(.5);
 
-            $this->ocultar();
+            $this->hidden_item = 'hidden';
 
-            $this->final_inspeccion();
+            // $this->final_inspeccion();
 
             // session()->flash('message', 'todo bien');
 
@@ -111,7 +149,6 @@ class Formulario extends Component
         $total = 100 - $this->total_vista;
         $items = Item::find($this->item_id);
         $items_relation = $items->get_subitems;
-
 
         return view('livewire.formulario', compact('items', 'total', 'item_id','items_relation'));
     }

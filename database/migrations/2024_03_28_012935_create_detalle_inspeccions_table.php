@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('detalle_inspeccions', function (Blueprint $table) {
             $table->id();
             $table->integer('inspeccion_id');
-            $table->string('item');
-            $table->string('subitem');
-            $table->string('fecha');
-            $table->string('porcentaje');
+            $table->integer('status')->default(1);
+            $table->integer('item_id')->nullable();
+            $table->string('subitem')->nullable();
+            $table->string('fecha')->nullable();
+            $table->string('image')->nullable();
             $table->string('responsable');
             $table->timestamps();
         });

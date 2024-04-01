@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('codigo');
             $table->string('fecha');
-            $table->string('lugar');
+            $table->string('item_id');
+            $table->string('item');
             $table->string('porcen_total');
+            $table->string('observaciones')->nullable();
             $table->string('responsable');
             $table->timestamps();
         });
