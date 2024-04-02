@@ -9,8 +9,12 @@ use App\Models\Informe;
 use App\Models\Inspeccion;
 use App\Models\Subitem;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Elibyy\TCPDF\Facades\TCPDF;
+
+use function Livewire\Volt\updated;
 
 class Formulario extends Component
 {
@@ -80,13 +84,9 @@ class Formulario extends Component
         //     # code...
         //     dump(in_array($value->descripcion ,$this->check));
         // }
-        // foreach ($this->image as $key => $value) {
-        //     # code...
-        //     dump($key);
-        // }
+
+
         // dd($this->item_id);
-
-
 
 
         // dd($this->check, $this->item_id);
@@ -121,21 +121,24 @@ class Formulario extends Component
                 $detalle_inspeccions->fecha = date('d-m-Y');
                 $detalle_inspeccions->item_id = $value->item_id;
                 $detalle_inspeccions->subitem = $value->descripcion;
-                $detalle_inspeccions->image = $this->observaciones;
                 $detalle_inspeccions->responsable = $user;
                 $detalle_inspeccions->save();
 
             }
 
-
+            foreach ($this->image as $key => $valor) {
+                $img = $valor->store(path: 'photos');
+                $sub_i = Subitem::where('id', $key)->first()->descripcion;
+                DB::table('detalle_inspeccions')
+                    ->where('subitem', $sub_i)
+                    ->update([
+                        'image' => $img
+                    ]);
+            }
 
             sleep(.5);
 
             $this->hidden_item = 'hidden';
-
-            // $this->final_inspeccion();
-
-            // session()->flash('message', 'todo bien');
 
 
         } catch (\Throwable $th) {
