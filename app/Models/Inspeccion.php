@@ -30,7 +30,7 @@ class Inspeccion extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function get_detalle_inpeccions(): HasMany
+    public function get_detalles(): HasMany
     {
         return $this->hasMany(DetalleInspeccion::class);
     }

@@ -1,4 +1,5 @@
 <div>
+
     <div x-data="{ selected: null }" class="border border-gray-200 rounded-lg shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]" class="p-3">
         <!-- The accordion items -->
         <div class="[&>*]:border-b [&>*]:border-b-gray-200 last:[&>*]:border-b-0">
@@ -25,10 +26,39 @@
                                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                             <tr>
                                                 <th scope="col" class="px-2">
-                                                    <label class="inline-flex items-center cursor-pointer">
-                                                        <input type="checkbox" wire:model.live="check" name="check" value="{{ $items_relation[$i]->descripcion }}" class="sr-only peer" wire:click="total()">
+                                                    {{-- {{ var_export($check) }} --}}
+                                                    {{-- <label class="inline-flex items-center cursor-pointer mr-6">
+                                                        <input type="checkbox" wire:model.live="check" name="check" value="{{ $items_relation[$i]->descripcion }}" class="sr-only peer" wire:click="total()" placeholder="si">
                                                         <div class="relative w-11 h-6 bg-green-600 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-red-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all peer-checked:bg-red-600"></div>
-                                                    </label>
+                                                        <span class="absolute font-extrabold text-sm uppercase right-20 text-green-600"> SI </span>
+                                                        <span class="absolute font-extrabold text-xs uppercase left-14 text-red-600"> NO </span>
+                                                    </label> --}}
+                                                    <div class="relative inline-block">
+                                                        <input  type="checkbox"
+                                                                wire:model.live="check"
+                                                                name="check"
+                                                                value="{{ $items_relation[$i]->descripcion }}"
+                                                                wire:click="total()"
+                                                                id="hs-default-solid-switch-with-icons"
+                                                                class="peer relative w-[3.25rem] h-7 p-px bg-green-300 border-transparent text-transparent rounded-full
+                                                                cursor-pointer transition-colors ease-in-out duration-200 focus:ring-gray-100 disabled:opacity-50
+                                                                disabled:pointer-events-none checked:bg-none checked:text-red-600 checked:border-red-600
+                                                                focus:checked:border-red-600 before:inline-block before:size-6 before:bg-green-600 checked:before:bg-white
+                                                                before:translate-x-0 checked:before:translate-x-full before:rounded-full before:shadow before:transform before:ring-0
+                                                                before:transition before:ease-in-out before:duration-200">
+                                                        <label for="hs-default-solid-switch-with-icons" class="sr-only">switch</label>
+                                                        <span class="peer-checked:text-white text-white font-extrabold size-6 absolute top-0.5 start-0.5 flex justify-center items-center pointer-events-none transition-colors ease-in-out duration-200">
+                                                            <svg class="flex-shrink-0 size-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                                <polyline points="20 6 9 17 4 12" />
+                                                            </svg>
+                                                        </span>
+                                                        <span class="peer-checked:text-red-600 text-white font-extrabold size-6 absolute top-0.5 end-0.5 flex justify-center items-center pointer-events-none transition-colors ease-in-out duration-200">
+                                                            <svg class="flex-shrink-0 size-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="M18 6 6 18" />
+                                                                <path d="m6 6 12 12" />
+                                                            </svg>
+                                                        </span>
+                                                    </div>
                                                 </th>
                                             </tr>
                                         </thead>

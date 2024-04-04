@@ -123,11 +123,10 @@ class Formulario extends Component
                 $detalle_inspeccions->subitem = $value->descripcion;
                 $detalle_inspeccions->responsable = $user;
                 $detalle_inspeccions->save();
-
             }
 
             foreach ($this->image as $key => $valor) {
-                $img = $valor->store(path: 'photos');
+                $img = $valor->store('/photos', 'public');
                 $sub_i = Subitem::where('id', $key)->first()->descripcion;
                 DB::table('detalle_inspeccions')
                     ->where('subitem', $sub_i)

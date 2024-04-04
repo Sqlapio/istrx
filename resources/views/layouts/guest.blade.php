@@ -25,7 +25,7 @@
             </div>
             <footer class="bg-white rounded-lg m-4">
                 <div class="w-full max-w-screen-md mx-auto p-5 md:py-8">
-                    <span class="block text-sm text-gray-500 text-center">© 2024 <a href="https://flowbite.com/" class="hover:underline">Desarrollado por: SqlapioTechnology™</a>. All Rights Reserved.</span>
+                    <span class="block text-sm text-gray-500 text-center">© 2024 <a href="https://sqlapio.com/" class="hover:underline">Desarrollado por: SqlapioTechnology™</a>. All Rights Reserved.</span>
                 </div>
             </footer>
         </div>

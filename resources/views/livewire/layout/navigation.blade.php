@@ -25,10 +25,16 @@ $logout = function (Logout $logout) {
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('DASHBOARD') }}
+                        {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('form')" :active="request()->routeIs('form')" wire:navigate>
-                        {{ __('FORMULARIO DE INSPECCIÓN') }}
+                        {{ __('Formulario de Inspección') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('incidente')" :active="request()->routeIs('incidente')" wire:navigate>
+                        {{ __('Incidentes') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('reporte')" :active="request()->routeIs('reporte')" wire:navigate>
+                        {{ __('Generar Reporte') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -80,6 +86,15 @@ $logout = function (Logout $logout) {
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('form')" :active="request()->routeIs('form')" wire:navigate>
+                {{ __('Formulario de Inspección') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('incidente')" :active="request()->routeIs('incidente')" wire:navigate>
+                {{ __('Incidentes') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('reporte')" :active="request()->routeIs('reporte')" wire:navigate>
+                {{ __('Generar Reporte') }}
             </x-responsive-nav-link>
         </div>
 

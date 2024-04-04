@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class DetalleInspeccion extends Model
@@ -33,6 +34,6 @@ class DetalleInspeccion extends Model
      */
     public function get_inspeccion(): HasOne
     {
-        return $this->hasOne(Inspeccion::class);
+        return $this->hasOne(Inspeccion::class, 'id', 'inspeccion_id');
     }
 }
