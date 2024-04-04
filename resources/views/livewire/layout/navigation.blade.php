@@ -22,21 +22,29 @@ $logout = function (Logout $logout) {
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('form')" :active="request()->routeIs('form')" wire:navigate>
-                        {{ __('Formulario de Inspección') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('incidente')" :active="request()->routeIs('incidente')" wire:navigate>
-                        {{ __('Incidentes') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('reporte')" :active="request()->routeIs('reporte')" wire:navigate>
-                        {{ __('Generar Reporte') }}
-                    </x-nav-link>
-                </div>
+                @if(Auth::user()->tipo == 'Bdt')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    </div>
+                @else
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('form')" :active="request()->routeIs('form')" wire:navigate>
+                            {{ __('Formulario de Inspección') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('incidente')" :active="request()->routeIs('incidente')" wire:navigate>
+                            {{ __('Incidentes') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('reporte')" :active="request()->routeIs('reporte')" wire:navigate>
+                            {{ __('Generar Reporte') }}
+                        </x-nav-link>
+                    </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->
@@ -81,7 +89,36 @@ $logout = function (Logout $logout) {
         </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
+    @if(Auth::user()->tipo == 'Bdt')
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+                {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <!-- Responsive Settings Options -->
+        <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+            <div class="px-4">
+                <div class="font-medium text-base text-gray-800 dark:text-gray-200" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
+                <div class="font-medium text-sm text-gray-500">{{ auth()->user()->email }}</div>
+            </div>
+
+            <div class="mt-3 space-y-1">
+                <x-responsive-nav-link :href="route('profile')" wire:navigate>
+                    {{ __('Profile') }}
+                </x-responsive-nav-link>
+
+                <!-- Authentication -->
+                <button wire:click="logout" class="w-full text-start">
+                    <x-responsive-nav-link>
+                        {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                </button>
+            </div>
+        </div>
+    </div>
+    @else
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
@@ -119,4 +156,6 @@ $logout = function (Logout $logout) {
             </div>
         </div>
     </div>
+    @endif
+    
 </nav>
