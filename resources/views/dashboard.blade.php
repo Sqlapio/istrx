@@ -2,7 +2,7 @@
 use App\Models\User;
 use App\Models\Reporte;
 
-$reportes = Reporte::where('fecha', date('d-m-Y'))->get();
+$reportes = Reporte::all();
 
 @endphp
 <x-app-layout>
