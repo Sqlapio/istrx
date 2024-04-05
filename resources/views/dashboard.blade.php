@@ -8,7 +8,7 @@ $reportes = Reporte::all();
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Historial de Informes - Estación Metro de Chacao') }}
         </h2>
     </x-slot>
 
@@ -20,13 +20,16 @@ $reportes = Reporte::all();
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead class="text-xs text-black uppercase bg-[#ee700f] dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Fecha de Inspección
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Responsable
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Cargo
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Archivo
@@ -44,6 +47,9 @@ $reportes = Reporte::all();
                 </th>
                 <td class="px-6 py-4">
                     {{ $item->responsable }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $item->cargo }}
                 </td>
                 <td class="px-6 py-4">
                     <a href="{{ asset('/'.$item->archivo) }}" target="_blank">Ver archivo</a>
