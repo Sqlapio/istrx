@@ -41,7 +41,7 @@ class LoginExterno extends Component
 
                 $lat = number_format($this->lat, 2, '.');
                 $long = number_format($this->lng, 2, '.');
-
+                dd($lat, $long);
                 $coords = Geolocalizacion::where('latitud', $lat)->where('longitud', $long)->first();
                 if(isset($coords))
                 {
