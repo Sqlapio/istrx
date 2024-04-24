@@ -53,18 +53,12 @@ class LoginExterno extends Component
 
                 }else{
 
-                    /**Log de recorrido */
-                    // UtilsController::log_recorrido($user, $entrada = null, $accion = 'El usuario se encuentra fuera de al ubicacion');
-
                     session()->flash('notificacion', 'El usuario no se encuentra en la ubicación correcta.');
 
                 }
                 // dd(number_format($this->lng, 2, '.'), number_format($this->lat, 2, '.'), $user);
             }else{
-                $this->notification()->error(
-                    $title = 'NOTIFICACIÓN',
-                    $description = 'Usuario no registrado'
-                );
+                session()->flash('notificacion', 'El usuario no se encuentra registrado. Pongase en contacto con el Admistrador del Sistema');
             }
         } catch (\Throwable $th) {
             dd($th);
