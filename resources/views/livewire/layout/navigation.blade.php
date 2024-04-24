@@ -63,7 +63,7 @@ $logout = function (Logout $logout) {
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile')" >
-                            {{ __('Profile') }}
+                            {{ __('Perfil') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -105,7 +105,7 @@ $logout = function (Logout $logout) {
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile')" >
-                    {{ __('Profile') }}
+                    {{ __('Perfil') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -143,7 +143,7 @@ $logout = function (Logout $logout) {
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile')" >
-                    {{ __('Profile') }}
+                    {{ __('Perfil') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
