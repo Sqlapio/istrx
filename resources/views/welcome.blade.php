@@ -6,6 +6,10 @@
 
         <title>ISTRX</title>
 
+        <link rel="icon" sizes="256x256" href="{{ asset('images/favicon.ico') }}">
+        <link rel="icon" sizes="180x180" href="{{ asset('images/favicon.ico') }}">
+        <link rel="apple-touch-icon" href="{{ asset('images/trx.png') }}"/>
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
