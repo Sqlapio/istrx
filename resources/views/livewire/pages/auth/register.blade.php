@@ -14,16 +14,24 @@ layout('layouts.guest');
 
 state([
     'name' => '',
+    'cedula' => '',
+    'tipo' => '',
     'email' => '',
     'password' => '',
     'password_confirmation' => ''
 ]);
 
 rules([
-    'name' => ['required', 'string', 'max:255'],
-    'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-    'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
-]);
+    'name'      => ['required', 'string', 'max:255'],
+    'tipo'      => ['required', 'string'],
+    'cedula'    => ['required', 'numeric', 'max:8', 'min:3', 'unique:'.User::class],
+    'email'     => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+    'password'  => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+])->messages([
+        'cedula.numeric' => 'El valor debe ser numerico',
+        'cedula.max' => 'El valor no puede ser mayor a 8 digitos',
+        'cedula.min' => 'El valor no puede ser menor a 3 digitos',
+    ]);
 
 $register = function () {
     $validated = $this->validate();
@@ -48,10 +56,23 @@ $register = function () {
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+        <!-- Cedula -->
+        <div class="mt-4">
+            {{-- <x-input-label for="name" :value="__('Nombre y Apellido')" /> --}}
+            <x-text-input wire:model="cedula" id="cedula" class="block mt-1 w-full" type="text" name="cedula" required autofocus autocomplete="cedula" placeholder="Cédula de identidad" />
+            <x-input-error :messages="$errors->get('cedula')" class="mt-2" />
+        </div>
+
         <!-- Email Address -->
         <div class="mt-4">
             {{-- <x-input-label for="email" :value="__('Email')" /> --}}
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" placeholder="Email"/>
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+
+        <div class="mt-4">
+            {{-- <x-input-label for="email" :value="__('Email')" /> --}}
+            <x-input-select wire:model="tipo" id="tipo" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" placeholder="Email" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 

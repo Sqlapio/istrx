@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -18,6 +19,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'cedula',
+        'tipo', // 1: administrador, 2: supervisor, 3: empleado
         'email',
         'password',
     ];
@@ -43,5 +46,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Get all of the asistencia for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function getAsistencia(): HasMany
+    {
+        return $this->hasMany(Asistencia::class, 'id', 'user_id');
     }
 }
