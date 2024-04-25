@@ -42,7 +42,6 @@ class LoginExterno extends Component
 
                 $lat = number_format($this->lat, 4, '.');
                 $long = number_format($this->lng, 4, '.');
-                dd($lat, $long);
                 $coords = Geolocalizacion::where('latitud', $lat)->where('longitud', $long)->first();
                 if(isset($coords))
                 {
@@ -78,7 +77,7 @@ class LoginExterno extends Component
             }else{
                 session()->flash('notificacion', 'El usuario no se encuentra registrado. Pongase en contacto con el Admistrador del Sistema');
             }
-            
+
         } catch (\Throwable $th) {
             dd($th);
         }
