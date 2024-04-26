@@ -21,13 +21,13 @@ $logout = function (Logout $logout) {
                     </a>
                 </div>
 
-                @if(Auth::user()->tipo == 'Bdt')
+                @if(Auth::user()->tipo == '1')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" >
                             {{ __('Dashboard') }}
                         </x-nav-link>
                     </div>
-                @else
+                @elseif(Auth::user()->tipo == '2')
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" >
@@ -43,6 +43,10 @@ $logout = function (Logout $logout) {
                             {{ __('Generar Reporte') }}
                         </x-nav-link>
                     </div>
+                @else
+                <x-nav-link :href="route('upload-image')" :active="request()->routeIs('upload-image')" >
+                    {{ __('Foto empleado') }}
+                </x-nav-link>
                 @endif
             </div>
 
@@ -88,7 +92,7 @@ $logout = function (Logout $logout) {
         </div>
     </div>
 
-    @if(Auth::user()->tipo == 'Bdt')
+    @if(Auth::user()->tipo == '1')
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" >
