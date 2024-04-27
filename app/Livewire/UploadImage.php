@@ -30,7 +30,7 @@ class UploadImage extends Component
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
-            return redirect('/');
+            return redirect('/registro-exitoso');
 
         } catch (\Throwable $th) {
             dd($th);

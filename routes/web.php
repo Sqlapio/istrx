@@ -11,6 +11,8 @@ Route::view('/', 'welcome');
 
 Route::view('/pp', 'prueba');
 
+Route::view('/registro-exitoso', 'registro-exitoso')->name('registro-exitoso');
+
 Route::view('/informe', 'pdf.informe');
 
 Route::view('dashboard', 'dashboard')

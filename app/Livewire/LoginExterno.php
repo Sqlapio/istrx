@@ -61,7 +61,8 @@ class LoginExterno extends Component
                         Session::invalidate();
                         Session::regenerateToken();
                         session()->flash('notificacion', 'El usuario ya posse registros de entrada y salida en esta jornada laboral.');
-                        return redirect()->back();
+                        // return redirect()->back();
+                        return redirect('/registro-exitoso');
 
                     }else{
                         $user_entrada = Asistencia::where('user_id', $user_logueado->id)->where('fecha', date('d-m-Y'))->first();
@@ -75,7 +76,8 @@ class LoginExterno extends Component
                             Session::invalidate();
                             Session::regenerateToken();
                             session()->flash('notificacion', 'El registro de salida se realizó con éxito.');
-                            return redirect()->back();
+                            // return redirect()->back();
+                            return redirect('/registro-exitoso');
                         }
 
                     }
