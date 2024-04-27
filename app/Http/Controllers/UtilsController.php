@@ -6,6 +6,7 @@ use App\Models\Asistencia;
 use App\Models\LogRecorrido;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 
 class UtilsController extends Controller

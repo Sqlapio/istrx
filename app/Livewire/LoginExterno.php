@@ -7,6 +7,7 @@ use App\Models\Asistencia;
 use App\Models\User;
 use App\Models\Geolocalizacion;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -38,11 +39,14 @@ class LoginExterno extends Component
             if(isset($user))
             {
                 Auth::login($user);
+                Session::regenerate();
+
                 $user_logueado = Auth::user();
 
                 $lat = number_format($this->lat, 4, '.');
                 $long = number_format($this->lng, 4, '.');
                 $coords = Geolocalizacion::where('latitud', $lat)->where('longitud', $long)->first();
+
                 if(isset($coords))
                 {
                     /**Pregunto? si el usuario ya tiene registros de entrada y salida del dia actual*/
@@ -53,21 +57,30 @@ class LoginExterno extends Component
                     ->first();
 
                     if(isset($_entSal)){
-                        session()->flash('notificacion', 'El usuario ya posse registros de entrada y salida.');
+                        Auth::logout();
+                        Session::invalidate();
+                        Session::regenerateToken();
+                        session()->flash('notificacion', 'El usuario ya posse registros de entrada y salida en esta jornada laboral.');
+                        // return redirect()->back();
+                        return redirect('/registro-exitoso');
 
                     }else{
-                        /**Pregunto? si el usuario ya se registro el dia de hoy */
                         $user_entrada = Asistencia::where('user_id', $user_logueado->id)->where('fecha', date('d-m-Y'))->first();
                         if(!isset($user_entrada)){
                             UtilsController::entrada($user_logueado->id);
+                            $this->redirectIntended(default: route('upload-image', absolute: false), navigate: false);
 
                         }else{
                             UtilsController::salida($user_logueado->id);
+                            Auth::logout();
+                            Session::invalidate();
+                            Session::regenerateToken();
+                            session()->flash('notificacion', 'El registro de salida se realizó con éxito.');
+                            // return redirect()->back();
+                            return redirect('/registro-exitoso');
                         }
-                    }
 
-                    // return redirect(ProvidersRouteServiceProvider::HOME);
-                    $this->redirectRoute('login-externo');
+                    }
 
                 }else{
                     session()->flash('notificacion', 'El usuario no se encuentra en la ubicación correcta.');

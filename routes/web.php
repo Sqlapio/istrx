@@ -3,12 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Image;
 use App\Livewire\LoginExterno;
+use App\Livewire\UploadImage;
 use Elibyy\TCPDF\Facades\TCPDF;
 use Spatie\Browsershot\Browsershot;
 
 Route::view('/', 'welcome');
 
 Route::view('/pp', 'prueba');
+
+Route::view('/registro-exitoso', 'registro-exitoso')->name('registro-exitoso');
 
 Route::view('/informe', 'pdf.informe');
 
@@ -32,6 +35,11 @@ Route::view('reporte', 'reporte')
     ->middleware(['auth', 'verified'])
     ->name('reporte');
 
+Route::view('upload-image', 'upload-image')
+    ->middleware(['auth'])
+    ->name('upload-image');
+
+
 Route::get('/ex', function () {
     // $html = view()->make('prueba')->render();
     // $pdf = new TCPDF;
@@ -45,8 +53,9 @@ Route::get('/ex', function () {
 
 });
 
-Route::post('/upload/image', [Image::class, 'uploadImages'])->middleware(['auth', 'verified'])->name("pay-plan");
+// Route::post('/upload/image', [Image::class, 'uploadImages'])->middleware(['auth', 'verified'])->name("pay-plan");
 Route::get('/l/e', LoginExterno::class)->name('login-externo');
+// Route::get('/image', UploadImage::class)->middleware(['auth', 'verified'])->name('image');
 Route::view('g', 'geolocalizacion')->name('geolocalizacion');
 
 require __DIR__.'/auth.php';
