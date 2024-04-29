@@ -73,23 +73,6 @@ class Formulario extends Component
 
     public function store()
     {
-        // dump($this->check);
-        // dump($this->image);
-        // dump(100 - $this->total_vista);
-
-        // $pr = Subitem::where('item_id', $this->item_id)->get();
-        // dump($pr);
-
-        // foreach ($pr as $value) {
-        //     # code...
-        //     dump(in_array($value->descripcion ,$this->check));
-        // }
-
-
-        // dd($this->item_id);
-
-
-        // dd($this->check, $this->item_id);
         try {
 
             $user = Auth::user()->name;

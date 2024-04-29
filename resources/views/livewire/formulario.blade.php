@@ -16,7 +16,8 @@
                     </div>
                 </button>
                 <div class="{{ $hidden_item }}">
-                    <div x-cloak x-show="selected === {{$items->id}}" class="text-sm rounded-lg text-black/50 p-5 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]" x-transition:enter="transition ease-out duration-100 x-transition:enter-start="transform opacity-0 scale-95">
+                    <div x-cloak x-show="selected === {{$items->id}}" class="text-sm rounded-lg text-black/50 p-5
+                        shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]" x-transition:enter="transition ease-out duration-100 x-transition:enter-start="transform opacity-0 scale-95">
                         {{-- @foreach($items->get_subitems as $subitems) --}}
                         @for($i = 0; $i < count($items_relation); $i++)
                             <div class="flex justify-between">
@@ -76,6 +77,10 @@
                                 </div>
                             </label>
                         @endfor
+
+                        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Observaciones:</label>
+                        <textarea wire:model='observaciones' id="message" rows="4" class="block p-2.5 mb-5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]" placeholder="Por favor escriba su observación de forma detallada"></textarea>
+
                         {{-- @endforeach --}}
                         <button type="submit" wire:click.prevent="store()" class="flex justify-center w-full h-full rounded-full border border-[#803f11] bg-[#ee700f] py-2 px-4 text-sm items-center sm:text-center font-bold text-white shadow-lg hover:bg-check-green">
                             <svg xmlns="http://www.w3.org/2000/svg" wire:loading wire:target="store" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="animate-spin h-5 w-5 mr-3">
