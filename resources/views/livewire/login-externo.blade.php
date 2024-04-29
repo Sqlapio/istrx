@@ -22,7 +22,7 @@
     @endif
 
     <!-- Ubicacion GPS -->
-    {{-- @script
+    @script
         <script>
                 if(navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(
@@ -43,6 +43,6 @@
                 }
 
         </script>
-    @endscript --}}
+    @endscript
 </div>
 
