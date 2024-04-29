@@ -24,12 +24,12 @@ state([
 rules([
     'name'      => ['required', 'string', 'max:255'],
     'tipo'      => ['required', 'string'],
-    'cedula'    => ['required', 'numeric', 'max:8', 'min:3', 'unique:'.User::class],
+    'cedula'    => ['required', 'numeric', 'min:3', 'unique:'.User::class],
     'email'     => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
     'password'  => ['required', 'string', 'confirmed', Rules\Password::defaults()],
 ])->messages([
         'cedula.numeric' => 'El valor debe ser numerico',
-        'cedula.max' => 'El valor no puede ser mayor a 8 digitos',
+        // 'cedula.max' => 'El valor no puede ser mayor a 8 digitos',
         'cedula.min' => 'El valor no puede ser menor a 3 digitos',
     ]);
 
