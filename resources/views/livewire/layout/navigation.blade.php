@@ -44,9 +44,11 @@ $logout = function (Logout $logout) {
                         </x-nav-link>
                     </div>
                 @else
-                <x-nav-link :href="route('upload-image')" :active="request()->routeIs('upload-image')" >
-                    {{ __('Foto empleado') }}
-                </x-nav-link>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('upload-image')" :active="request()->routeIs('upload-image')" >
+                        {{ __('Foto empleado') }}
+                    </x-nav-link>
+                </div>
                 @endif
             </div>
 
@@ -73,7 +75,7 @@ $logout = function (Logout $logout) {
                         <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-start">
                             <x-dropdown-link>
-                                {{ __('Log Out') }}
+                                {{ __('Salir') }}
                             </x-dropdown-link>
                         </button>
                     </x-slot>
@@ -115,13 +117,13 @@ $logout = function (Logout $logout) {
                 <!-- Authentication -->
                 <button wire:click="logout" class="w-full text-start">
                     <x-responsive-nav-link>
-                        {{ __('Log Out') }}
+                        {{ __('Salir') }}
                     </x-responsive-nav-link>
                 </button>
             </div>
         </div>
     </div>
-    @else
+    @elseif(Auth::user()->tipo == '2')
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" >
@@ -135,6 +137,27 @@ $logout = function (Logout $logout) {
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('reporte')" :active="request()->routeIs('reporte')" >
                 {{ __('Generar Reporte') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="mt-3 space-y-1">
+            <x-responsive-nav-link :href="route('profile')" >
+                {{ __('Perfil') }}
+            </x-responsive-nav-link>
+
+            <!-- Authentication -->
+            <button wire:click="logout" class="w-full text-start">
+                <x-responsive-nav-link>
+                    {{ __('Salir') }}
+                </x-responsive-nav-link>
+            </button>
+        </div>
+
+    </div>
+    @else
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('upload-image')" :active="request()->routeIs('upload-image')" >
+                {{ __('Foto empleado') }}
             </x-responsive-nav-link>
         </div>
 
@@ -153,7 +176,7 @@ $logout = function (Logout $logout) {
                 <!-- Authentication -->
                 <button wire:click="logout" class="w-full text-start">
                     <x-responsive-nav-link>
-                        {{ __('Log Out') }}
+                        {{ __('Salir') }}
                     </x-responsive-nav-link>
                 </button>
             </div>

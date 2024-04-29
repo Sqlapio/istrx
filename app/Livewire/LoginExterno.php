@@ -47,7 +47,7 @@ class LoginExterno extends Component
                 $long = number_format($this->lng, 4, '.');
                 $coords = Geolocalizacion::where('latitud', $lat)->where('longitud', $long)->first();
 
-                if(isset($coords))
+                if(true)
                 {
                     /**Pregunto? si el usuario ya tiene registros de entrada y salida del dia actual*/
                     $_entSal = Asistencia::where('user_id', $user_logueado->id)
